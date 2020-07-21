@@ -26,6 +26,7 @@ import (
 	"github.com/bazelbuild/rules_docker/container/go/pkg/oci"
 	"github.com/bazelbuild/rules_docker/container/go/pkg/utils"
 	"github.com/google/go-containerregistry/pkg/authn"
+	"github.com/google/go-containerregistry/pkg/logs"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
@@ -44,6 +45,10 @@ var (
 	layers              utils.ArrayStringFlags
 	stampInfoFile       utils.ArrayStringFlags
 )
+
+func init() {
+	logs.Progress.SetOutput(os.Stdout)
+}
 
 // checkClientConfig ensures the given string represents a valid docker client
 // config by ensuring:
